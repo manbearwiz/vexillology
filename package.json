@@ -1,0 +1,75 @@
+{
+  "name": "vexillology",
+  "version": "0.0.0-development",
+  "description": "Pluggable feature flag SDK wrapper for Javascript",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "/dist"
+  ],
+  "engines": {
+    "node": ">= 6.4.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint src --ext ts",
+    "format": "prettier --write .",
+    "check-format": "prettier --check .",
+    "prepublish": "npm run build",
+    "prepare": "husky install",
+    "semantic-release": "semantic-release"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/manbearwiz/vexillology.git"
+  },
+  "keywords": [],
+  "author": "Kevin Brey",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/manbearwiz/vexillology/issues"
+  },
+  "homepage": "https://github.com/manbearwiz/vexillology#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^17.0.3",
+    "@commitlint/config-angular": "^17.0.3",
+    "@tsconfig/recommended": "^1.0.1",
+    "@types/node": "^16.11.7",
+    "@typescript-eslint/eslint-plugin": "^4.31.0",
+    "@typescript-eslint/parser": "^4.31.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.24.2",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.4.1",
+    "prettier": "2.6.2",
+    "typescript": "~4.3.5",
+    "semantic-release": "^19.0.3"
+  },
+  "peerDependencies": {
+    "@optimizely/optimizely-sdk": "^4.0.0",
+    "@splitsoftware/splitio": "^10.0.0",
+    "launchdarkly-js-client-sdk": "^2.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@optimizely/optimizely-sdk": {
+      "optional": true
+    },
+    "@splitsoftware/splitio": {
+      "optional": true
+    },
+    "launchdarkly-js-client-sdk": {
+      "optional": true
+    }
+  },
+  "lint-staged": {
+    "*.ts": "eslint --cache --fix",
+    "*.{ts,css,md}": "prettier --write"
+  },
+  "release": {
+    "branches": [
+      "main"
+    ]
+  }
+}
