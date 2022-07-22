@@ -1,10 +1,10 @@
 import { SplitFactory } from '@splitsoftware/splitio';
 
-import { VexillologyTransport } from './models';
+import { VexillologyClient } from './models';
 
-export class SplitTransport implements VexillologyTransport {
+export class SplitClient implements VexillologyClient {
   client: SplitIO.IClient;
-  constructor(private consumer: string, settings: SplitIO.INodeSettings) {
+  constructor(settings: SplitIO.INodeSettings) {
     const factory = SplitFactory(settings);
 
     this.client = factory.client();
@@ -18,6 +18,18 @@ export class SplitTransport implements VexillologyTransport {
   }
 
   get(key: string): unknown {
-    return this.client.getTreatment(this.consumer, key);
+    return this.client.getTreatment(key);
+  }
+
+  track(
+    eventKey: string,
+    metricValue?: number | undefined,
+    attributes?: Record<string, string | number | boolean | null>,
+  ): void {
+    this.client.track(eventKey, metricValue, attributes);
+  }
+
+  async close(): Promise<void> {
+    return this.client.destroy();
   }
 }

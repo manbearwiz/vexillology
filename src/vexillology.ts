@@ -1,13 +1,25 @@
-import { VexillologyTransport } from './models';
+import { VexillologyClient } from './models';
 
-export class VexillologyClient {
-  constructor(private transport: VexillologyTransport) {}
+export class Vexillology {
+  constructor(private client: VexillologyClient) {}
 
   async ready(): Promise<unknown> {
-    return this.transport.ready();
+    return this.client.ready();
   }
 
   get(key: string): unknown {
-    return this.transport.get(key);
+    return this.client.get(key);
+  }
+
+  track(
+    eventKey: string,
+    metricValue?: number | undefined,
+    attributes?: Record<string, string | number | boolean | null>,
+  ): void {
+    this.client.track(eventKey, metricValue, attributes);
+  }
+
+  async close(): Promise<void> {
+    return this.client.close();
   }
 }
