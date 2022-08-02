@@ -1,7 +1,7 @@
 import { VexillologyClient } from './models';
 
 export class Vexillology {
-  constructor(private client: VexillologyClient) {}
+  constructor(private readonly client: VexillologyClient) {}
 
   /**
    * Returns a Promise that tracks the client's initialization process.

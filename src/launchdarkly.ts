@@ -4,6 +4,7 @@ import {
   LDOptions,
   LDUser,
 } from 'launchdarkly-js-client-sdk';
+
 import { VexillologyClient } from './models';
 
 export class LaunchDarklyClient implements VexillologyClient {

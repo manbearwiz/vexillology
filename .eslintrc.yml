@@ -9,4 +9,49 @@ parserOptions:
   sourceType: module
 plugins:
   - '@typescript-eslint'
-rules: {}
+overrides:
+  - files:
+      - '*.ts'
+    parserOptions:
+      project:
+        - tsconfig.json
+      createDefaultProgram: true
+    extends:
+      - eslint:recommended
+      - plugin:@typescript-eslint/recommended
+      - plugin:@typescript-eslint/recommended-requiring-type-checking
+      - plugin:import/recommended
+      - plugin:import/typescript
+    rules:
+      '@typescript-eslint/explicit-member-accessibility':
+        - error
+        - accessibility: no-public
+      '@typescript-eslint/no-unused-vars':
+        - error
+        - varsIgnorePattern: '^_'
+      '@typescript-eslint/prefer-readonly': error
+      '@typescript-eslint/restrict-template-expressions':
+        - error
+        - allowNullish: true
+      '@typescript-eslint/unbound-method':
+        - error
+        - ignoreStatic: true
+      import/order:
+        - error
+        - newlines-between: always
+          alphabetize:
+            order: asc
+            caseInsensitive: true
+      max-classes-per-file:
+        - error
+        - 1
+      no-duplicate-imports: error
+      no-template-curly-in-string: error
+      prefer-template: error
+      no-shadow: 'off'
+      '@typescript-eslint/no-shadow': error
+    settings:
+      import/resolver:
+        typescript:
+          alwaysTryTypes: true
+          project: tsconfig.json

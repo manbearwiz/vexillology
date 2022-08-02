@@ -4,7 +4,12 @@ import { VexillologyClient } from './models';
 
 export class OptimizelyClient implements VexillologyClient {
   client: Client;
-  constructor(private userId: string, private feature: string, config: Config) {
+  constructor(
+    private readonly userId: string,
+    private readonly feature: string,
+    config: Config,
+  ) {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     this.client = createInstance(config)!;
   }
 
