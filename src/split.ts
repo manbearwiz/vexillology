@@ -1,13 +1,23 @@
 import { SplitFactory } from '@splitsoftware/splitio';
 
-import { VexillologyClient } from './models';
+import { UserAttributes, VexillologyClient } from './models';
 
 export class SplitClient implements VexillologyClient {
   client: SplitIO.IClient;
-  constructor(settings: SplitIO.INodeSettings) {
+
+  constructor(
+    private userAttributes: Record<string, string | number | boolean>,
+    settings: SplitIO.INodeSettings,
+  ) {
     const factory = SplitFactory(settings);
 
     this.client = factory.client();
+  }
+
+  async changeUser(id: string, attributes: UserAttributes): Promise<void> {
+    this.userAttributes = { id, ...attributes };
+
+    return Promise.resolve();
   }
 
   async ready(): Promise<unknown> {
@@ -18,7 +28,11 @@ export class SplitClient implements VexillologyClient {
   }
 
   get(key: string): unknown {
-    return this.client.getTreatment(key);
+    return this.client.getTreatment(key, this.userAttributes);
+  }
+
+  onUpdate(listener: () => void) {
+    this.client.on(this.client.Event.SDK_UPDATE, listener);
   }
 
   track(

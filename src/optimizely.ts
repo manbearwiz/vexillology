@@ -1,16 +1,29 @@
-import { Client, Config, createInstance } from '@optimizely/optimizely-sdk';
+import {
+  Client,
+  Config,
+  createInstance,
+  enums,
+  OptimizelyUserContext,
+} from '@optimizely/optimizely-sdk';
 
-import { VexillologyClient } from './models';
+import { VexillologyClient, UserAttributes } from './models';
 
 export class OptimizelyClient implements VexillologyClient {
   client: Client;
+  user: OptimizelyUserContext;
+
   constructor(
-    private readonly userId: string,
     private readonly feature: string,
     config: Config,
+    user: {
+      id: string;
+      attributes: UserAttributes;
+    },
   ) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     this.client = createInstance(config)!;
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    this.user = this.client.createUserContext(user.id, user.attributes)!;
   }
 
   async ready(): Promise<unknown> {
@@ -18,7 +31,23 @@ export class OptimizelyClient implements VexillologyClient {
   }
 
   get(key: string): unknown {
-    return this.client.getFeatureVariable(this.feature, key, this.userId);
+    const decision = this.user.decide(this.feature);
+
+    return decision.variables[key];
+  }
+
+  async changeUser(id: string, attributes: UserAttributes): Promise<void> {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    this.user = this.client.createUserContext(id, attributes)!;
+
+    return Promise.resolve();
+  }
+
+  onUpdate(listener: () => void): void {
+    this.client.notificationCenter.addNotificationListener(
+      enums.NOTIFICATION_TYPES.OPTIMIZELY_CONFIG_UPDATE,
+      listener,
+    );
   }
 
   track(
@@ -26,7 +55,10 @@ export class OptimizelyClient implements VexillologyClient {
     metricValue?: number | undefined,
     attributes?: Record<string, string | number | boolean | null>,
   ): void {
-    this.client.track(eventKey, this.userId, { ...attributes, metricValue });
+    this.user.trackEvent(eventKey, {
+      ...attributes,
+      metricValue: metricValue || null,
+    });
   }
 
   async close(): Promise<void> {

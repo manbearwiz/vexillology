@@ -5,7 +5,7 @@ import {
   LDUser,
 } from 'launchdarkly-js-client-sdk';
 
-import { VexillologyClient } from './models';
+import { UserAttributes, VexillologyClient } from './models';
 
 export class LaunchDarklyClient implements VexillologyClient {
   client: LDClient;
@@ -19,6 +19,17 @@ export class LaunchDarklyClient implements VexillologyClient {
 
   get(key: string): unknown {
     return this.client.variation(key);
+  }
+
+  onUpdate(listener: () => void) {
+    this.client.on('change', listener);
+  }
+
+  async changeUser(id: string, attributes: UserAttributes): Promise<void> {
+    await this.client.identify({
+      key: id,
+      ...attributes,
+    });
   }
 
   track(
