@@ -2,14 +2,18 @@ import {
   initialize,
   LDClient,
   LDOptions,
-  LDUser,
+  LDContext,
 } from 'launchdarkly-js-client-sdk';
 
 import type { UserAttributes, VexillologyClient } from './models';
 
 export class LaunchDarklyClient implements VexillologyClient {
   client: LDClient;
-  constructor(envKey: string, user: LDUser, options?: LDOptions | undefined) {
+  constructor(
+    envKey: string,
+    user: LDContext,
+    options?: LDOptions | undefined,
+  ) {
     this.client = initialize(envKey, user, options);
   }
 
