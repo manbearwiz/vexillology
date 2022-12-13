@@ -1,4 +1,4 @@
-import { VexillologyClient } from './models';
+import type { VexillologyClient } from './models';
 
 export class Vexillology {
   constructor(private readonly client: VexillologyClient) {}

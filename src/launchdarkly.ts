@@ -5,7 +5,7 @@ import {
   LDUser,
 } from 'launchdarkly-js-client-sdk';
 
-import { UserAttributes, VexillologyClient } from './models';
+import type { UserAttributes, VexillologyClient } from './models';
 
 export class LaunchDarklyClient implements VexillologyClient {
   client: LDClient;

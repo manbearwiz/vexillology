@@ -1,6 +1,6 @@
 import { SplitFactory } from '@splitsoftware/splitio';
 
-import { UserAttributes, VexillologyClient } from './models';
+import type { UserAttributes, VexillologyClient } from './models';
 
 export class SplitClient implements VexillologyClient {
   client: SplitIO.IClient;

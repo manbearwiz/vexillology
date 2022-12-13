@@ -3,7 +3,7 @@ import {
   UnleashClient as UnleashProxyClient,
 } from 'unleash-proxy-client';
 
-import { UserAttributes, VexillologyClient } from './models';
+import type { UserAttributes, VexillologyClient } from './models';
 
 export class UnleashClient implements VexillologyClient {
   private readonly client: UnleashProxyClient;

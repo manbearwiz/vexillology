@@ -6,7 +6,7 @@ import {
   OptimizelyUserContext,
 } from '@optimizely/optimizely-sdk';
 
-import { VexillologyClient, UserAttributes } from './models';
+import type { VexillologyClient, UserAttributes } from './models';
 
 export class OptimizelyClient implements VexillologyClient {
   client: Client;
