@@ -5,6 +5,5 @@
     "declaration": true,
     "outDir": "./dist"
   },
-  "include": ["src/index.ts"],
-  "exclude": ["node_modules", "dist"]
+  "exclude": ["node_modules", "dist", "commitlint.config.js"]
 }
