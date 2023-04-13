@@ -1,6 +1,10 @@
 import { SplitFactory } from '@splitsoftware/splitio';
 
-import type { UserAttributes, VexillologyClient } from './models';
+import type {
+  ResultDetails,
+  UserAttributes,
+  VexillologyClient,
+} from './models';
 
 export class SplitClient implements VexillologyClient {
   client: SplitIO.IClient;
@@ -27,7 +31,12 @@ export class SplitClient implements VexillologyClient {
     });
   }
 
-  get(key: string): unknown {
+  get(key: string, detailed?: boolean): unknown;
+  get(key: string, detailed: true): ResultDetails;
+  get(key: string, detailed = false): unknown | ResultDetails {
+    if (detailed) {
+      throw new Error('Detailed get not supported for this client');
+    }
     return this.client.getTreatment(key, this.userAttributes);
   }
 

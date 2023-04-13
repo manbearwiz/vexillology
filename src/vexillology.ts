@@ -1,4 +1,4 @@
-import type { VexillologyClient } from './models';
+import type { ResultDetails, VexillologyClient } from './models';
 
 export class Vexillology {
   constructor(private readonly client: VexillologyClient) {}
@@ -16,8 +16,10 @@ export class Vexillology {
    * @param key - The unique key of the feature flag to get the value from.
    * @returns The value of the feature flag.
    */
-  get(key: string): unknown {
-    return this.client.get(key);
+  get(key: string, detailed?: boolean): unknown;
+  get(key: string, detailed: true): ResultDetails;
+  get(key: string, detailed = false): unknown | ResultDetails {
+    return this.client.get(key, detailed);
   }
 
   /**

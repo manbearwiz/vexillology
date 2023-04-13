@@ -3,7 +3,11 @@ import {
   UnleashClient as UnleashProxyClient,
 } from 'unleash-proxy-client';
 
-import type { UserAttributes, VexillologyClient } from './models';
+import type {
+  ResultDetails,
+  UserAttributes,
+  VexillologyClient,
+} from './models';
 
 export class UnleashClient implements VexillologyClient {
   private readonly client: UnleashProxyClient;
@@ -27,7 +31,12 @@ export class UnleashClient implements VexillologyClient {
     return this.starting;
   }
 
-  get(key: string): unknown {
+  get(key: string, detailed?: boolean): unknown;
+  get(key: string, detailed: true): ResultDetails;
+  get(key: string, detailed = false): unknown | ResultDetails {
+    if (detailed) {
+      throw new Error('Detailed get not supported for this client');
+    }
     return this.client.getVariant(key);
   }
 

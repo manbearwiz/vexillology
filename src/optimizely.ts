@@ -6,7 +6,11 @@ import {
   OptimizelyUserContext,
 } from '@optimizely/optimizely-sdk';
 
-import type { VexillologyClient, UserAttributes } from './models';
+import type {
+  VexillologyClient,
+  UserAttributes,
+  ResultDetails,
+} from './models';
 
 export class OptimizelyClient implements VexillologyClient {
   client: Client;
@@ -30,8 +34,20 @@ export class OptimizelyClient implements VexillologyClient {
     return this.client.onReady();
   }
 
-  get(key: string): unknown {
+  get(key: string, detailed?: boolean): unknown;
+  get(key: string, detailed: true): ResultDetails;
+  get(key: string, detailed = false): unknown | ResultDetails {
     const decision = this.user.decide(this.feature);
+
+    if (detailed) {
+      return {
+        key,
+        value: decision.variables[key],
+        _meta: {
+          ...decision,
+        },
+      } satisfies ResultDetails;
+    }
 
     return decision.variables[key];
   }

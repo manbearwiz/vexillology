@@ -5,7 +5,11 @@ import {
   LDContext,
 } from 'launchdarkly-js-client-sdk';
 
-import type { UserAttributes, VexillologyClient } from './models';
+import type {
+  ResultDetails,
+  UserAttributes,
+  VexillologyClient,
+} from './models';
 
 export class LaunchDarklyClient implements VexillologyClient {
   client: LDClient;
@@ -21,7 +25,20 @@ export class LaunchDarklyClient implements VexillologyClient {
     return this.client.waitUntilReady();
   }
 
-  get(key: string): unknown {
+  get(key: string, detailed?: boolean): unknown;
+  get(key: string, detailed: true): ResultDetails;
+  get(key: string, detailed = false): unknown | ResultDetails {
+    if (detailed) {
+      const detail = this.client.variationDetail(key);
+
+      return {
+        key,
+        value: detail.value,
+        _meta: {
+          ...detail,
+        },
+      } satisfies ResultDetails;
+    }
     return this.client.variation(key);
   }
 
