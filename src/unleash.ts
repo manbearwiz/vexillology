@@ -33,7 +33,7 @@ export class UnleashClient implements VexillologyClient {
 
   get(key: string, detailed?: boolean): unknown;
   get(key: string, detailed: true): ResultDetails;
-  get(key: string, detailed = false): unknown | ResultDetails {
+  get(key: string, detailed = false): unknown {
     if (detailed) {
       throw new Error('Detailed get not supported for this client');
     }

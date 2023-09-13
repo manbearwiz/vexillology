@@ -27,7 +27,7 @@ export class LaunchDarklyClient implements VexillologyClient {
 
   get(key: string, detailed?: boolean): unknown;
   get(key: string, detailed: true): ResultDetails;
-  get(key: string, detailed = false): unknown | ResultDetails {
+  get(key: string, detailed = false): unknown {
     if (detailed) {
       const detail = this.client.variationDetail(key);
 

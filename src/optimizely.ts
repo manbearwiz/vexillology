@@ -36,7 +36,7 @@ export class OptimizelyClient implements VexillologyClient {
 
   get(key: string, detailed?: boolean): unknown;
   get(key: string, detailed: true): ResultDetails;
-  get(key: string, detailed = false): unknown | ResultDetails {
+  get(key: string, detailed = false): unknown {
     const decision = this.user.decide(this.feature);
 
     if (detailed) {
@@ -73,7 +73,7 @@ export class OptimizelyClient implements VexillologyClient {
   ): void {
     this.user.trackEvent(eventKey, {
       ...attributes,
-      metricValue: metricValue || null,
+      metricValue: metricValue ?? null,
     });
   }
 

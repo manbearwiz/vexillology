@@ -18,7 +18,7 @@ export class Vexillology {
    */
   get(key: string, detailed?: boolean): unknown;
   get(key: string, detailed: true): ResultDetails;
-  get(key: string, detailed = false): unknown | ResultDetails {
+  get(key: string, detailed = false): unknown {
     return this.client.get(key, detailed);
   }
 
