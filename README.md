@@ -1,5 +1,11 @@
 # vexillology
 
+[![npm](https://img.shields.io/npm/v/vexillology?style=flat-square)](https://www.npmjs.com/package/vexillology?activeTab=versions)
+[![NPM](https://img.shields.io/npm/l/vexillology?style=flat-square)](https://raw.githubusercontent.com/manbearwiz/vexillology/master/LICENSE)
+[![npm](https://img.shields.io/npm/dt/vexillology?style=flat-square)](https://www.npmjs.com/package/vexillology)
+[![GitHub issues](https://img.shields.io/github/issues/manbearwiz/vexillology?style=flat-square)](https://github.com/manbearwiz/vexillology/issues)
+[![semantic-release: angular](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release&style=flat-square)](https://github.com/semantic-release/semantic-release)
+
 Pluggable feature flag SDK for Javascript
 
 ## Installation
