@@ -35,7 +35,7 @@
   },
   "homepage": "https://github.com/manbearwiz/vexillology#readme",
   "dependencies": {
-    "@optimizely/optimizely-sdk": "^4.0.0",
+    "@optimizely/optimizely-sdk": "^5.2.0",
     "@splitsoftware/splitio": "^10.2.0",
     "launchdarkly-js-client-sdk": "^3.0.0",
     "unleash-proxy-client": "^3.3.1"
