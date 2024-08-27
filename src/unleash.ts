@@ -1,5 +1,5 @@
 import {
-  IConfig,
+  type IConfig,
   UnleashClient as UnleashProxyClient,
 } from 'unleash-proxy-client';
 

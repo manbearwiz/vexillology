@@ -1,15 +1,15 @@
 import {
-  Client,
-  Config,
+  type Client,
+  type Config,
+  type OptimizelyUserContext,
   createInstance,
   enums,
-  OptimizelyUserContext,
 } from '@optimizely/optimizely-sdk';
 
 import type {
-  VexillologyClient,
-  UserAttributes,
   ResultDetails,
+  UserAttributes,
+  VexillologyClient,
 } from './models';
 
 export class OptimizelyClient implements VexillologyClient {
@@ -24,9 +24,9 @@ export class OptimizelyClient implements VexillologyClient {
       attributes: UserAttributes;
     },
   ) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    // biome-ignore lint/style/noNonNullAssertion: We know that createInstance will return a Client instance
     this.client = createInstance(config)!;
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    // biome-ignore lint/style/noNonNullAssertion: We know that createUserContext will return an OptimizelyUserContext instance
     this.user = this.client.createUserContext(user.id, user.attributes)!;
   }
 
@@ -53,7 +53,7 @@ export class OptimizelyClient implements VexillologyClient {
   }
 
   async changeUser(id: string, attributes: UserAttributes): Promise<void> {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    // biome-ignore lint/style/noNonNullAssertion: We know that createUserContext will return an OptimizelyUserContext instance
     this.user = this.client.createUserContext(id, attributes)!;
 
     return Promise.resolve();
