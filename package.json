@@ -63,7 +63,7 @@
     "vitest": "^2.0.5"
   },
   "release": {
-    "branches": ["main"]
+    "branches": ["main", { "name": "beta", "prerelease": true }]
   },
   "type": "module",
   "types": "dist/types/index.d.ts",
