@@ -1,8 +1,8 @@
 import {
+  type LDClient,
+  type LDContext,
+  type LDOptions,
   initialize,
-  LDClient,
-  LDOptions,
-  LDContext,
 } from 'launchdarkly-js-client-sdk';
 
 import type {

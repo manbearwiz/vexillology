@@ -1,2 +1,2 @@
-export * from './vexillology';
 export * from './models';
+export * from './vexillology';

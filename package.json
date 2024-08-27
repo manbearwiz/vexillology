@@ -2,26 +2,18 @@
   "name": "vexillology",
   "version": "0.0.0-development",
   "description": "Pluggable feature flag SDK wrapper for Javascript",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "/dist"
-  ],
-  "engines": {
-    "node": ">= 6.4.0"
-  },
+  "files": ["dist"],
   "scripts": {
-    "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prelint": "prettier --check \"**/*.{ts,json,md}\"",
-    "lint": "eslint src",
-    "prelint:fix": "prettier --write \"**/*.{ts,json,md}\"",
-    "lint:fix": "eslint src --fix",
-    "format": "prettier --write .",
-    "check-format": "prettier --check .",
+    "build": "npx concurrently npm:build:*",
+    "build:vite": "vite build",
+    "build:tsc": "tsc -b tsconfig.types.json",
+    "test": "vitest run",
+    "coverage": "vitest run --coverage",
+    "test:watch": "vitest --watch --coverage --ui",
     "prepublish": "npm run build",
-    "prepare": "husky install",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "lint": "npx @biomejs/biome check",
+    "lint:fix": "npx @biomejs/biome check --write"
   },
   "repository": {
     "type": "git",
@@ -34,38 +26,74 @@
     "url": "https://github.com/manbearwiz/vexillology/issues"
   },
   "homepage": "https://github.com/manbearwiz/vexillology#readme",
-  "dependencies": {
+  "peerDependencies": {
     "@optimizely/optimizely-sdk": "^4.0.0",
     "@splitsoftware/splitio": "^10.2.0",
     "launchdarkly-js-client-sdk": "^3.0.0",
     "unleash-proxy-client": "^3.3.1"
   },
-  "devDependencies": {
-    "@commitlint/cli": "^17.7.1",
-    "@commitlint/config-angular": "^17.7.0",
-    "@tsconfig/recommended": "^1.0.2",
-    "@tsconfig/strictest": "^2.0.3",
-    "@types/node": "^16.11.47",
-    "@typescript-eslint/eslint-plugin": "^6.4.1",
-    "@typescript-eslint/parser": "^6.4.1",
-    "eslint": "^8.47.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-import-resolver-typescript": "^3.6.1",
-    "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-jsdoc": "^48.2.0",
-    "husky": "^8.0.3",
-    "lint-staged": "^14.0.1",
-    "prettier": "^3.0.2",
-    "semantic-release": "^21.1.0",
-    "typescript": "^5.1.6"
+  "peerDependenciesMeta": {
+    "@optimizely/optimizely-sdk": {
+      "optional": true
+    },
+    "@splitsoftware/splitio": {
+      "optional": true
+    },
+    "launchdarkly-js-client-sdk": {
+      "optional": true
+    },
+    "unleash-proxy-client": {
+      "optional": true
+    }
   },
-  "lint-staged": {
-    "*.ts": "eslint --cache --fix",
-    "**/*": "prettier --write --ignore-unknown"
+  "devDependencies": {
+    "@biomejs/biome": "1.8.3",
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-angular": "^19.3.0",
+    "@tsconfig/recommended": "^1.0.3",
+    "@tsconfig/strictest": "^2.0.2",
+    "@tsconfig/vite-react": "^3.0.2",
+    "@types/node": "^20.12.12",
+    "@vitest/coverage-v8": "^2.0.5",
+    "@vitest/ui": "^2.0.5",
+    "happy-dom": "^15.0.0",
+    "semantic-release": "^22.0.0",
+    "typescript": "^5.2.2",
+    "vite": "^5.3.4",
+    "vitest": "^2.0.5"
   },
   "release": {
-    "branches": [
-      "main"
-    ]
+    "branches": ["main", { "name": "beta", "prerelease": true }]
+  },
+  "type": "module",
+  "types": "./dist/types/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./launchdarkly": {
+      "types": "./dist/types/launchdarkly.d.ts",
+      "import": "./dist/launchdarkly.js",
+      "require": "./dist/launchdarkly.cjs"
+    },
+    "./optimizely": {
+      "types": "./dist/types/optimizely.d.ts",
+      "import": "./dist/optimizely.js",
+      "require": "./dist/optimizely.cjs"
+    },
+    "./split": {
+      "types": "./dist/types/split.d.ts",
+      "import": "./dist/split.js",
+      "require": "./dist/split.cjs"
+    },
+    "./unleash": {
+      "types": "./dist/types/unleash.d.ts",
+      "import": "./dist/unleash.js",
+      "require": "./dist/unleash.cjs"
+    }
   }
 }
