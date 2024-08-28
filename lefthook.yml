@@ -19,7 +19,7 @@ pre-push:
   parallel: true
   commands:
     test:
-      run: npx vitest --run --coverage --silent --no-color --no-clearScreen
+      run: npx vitest --run --silent --no-color --no-clearScreen
       fail_text: "Tests failed"
     check-format:
       run: npx @biomejs/biome check --no-errors-on-unmatched --files-ignore-unknown=true .
