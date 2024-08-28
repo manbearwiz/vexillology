@@ -5,5 +5,11 @@
     "declaration": true,
     "outDir": "./dist"
   },
-  "exclude": ["node_modules", "dist", "commitlint.config.js", "vite.config.ts"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "commitlint.config.js",
+    "vite.config.ts",
+    "coverage"
+  ]
 }

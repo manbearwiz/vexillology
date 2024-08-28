@@ -66,14 +66,34 @@
     "branches": ["main", { "name": "beta", "prerelease": true }]
   },
   "type": "module",
-  "types": "dist/types/index.d.ts",
-  "main": "./dist/vexillology.umd.cjs",
-  "module": "./dist/vexillology.js",
+  "types": "./dist/types/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
-      "import": "./dist/vexillology.js",
-      "require": "./dist/vexillology.umd.cjs"
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./launchdarkly": {
+      "types": "./dist/types/launchdarkly.d.ts",
+      "import": "./dist/launchdarkly.js",
+      "require": "./dist/launchdarkly.cjs"
+    },
+    "./optimizely": {
+      "types": "./dist/types/optimizely.d.ts",
+      "import": "./dist/optimizely.js",
+      "require": "./dist/optimizely.cjs"
+    },
+    "./split": {
+      "types": "./dist/types/split.d.ts",
+      "import": "./dist/split.js",
+      "require": "./dist/split.cjs"
+    },
+    "./unleash": {
+      "types": "./dist/types/unleash.d.ts",
+      "import": "./dist/unleash.js",
+      "require": "./dist/unleash.cjs"
     }
   }
 }

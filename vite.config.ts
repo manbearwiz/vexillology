@@ -4,7 +4,13 @@ export default {
   build: {
     emptyOutDir: false,
     lib: {
-      entry: 'src/index.ts',
+      entry: [
+        'src/index.ts',
+        'src/launchdarkly.ts',
+        'src/optimizely.ts',
+        'src/split.ts',
+        'src/unleash.ts',
+      ],
       name: 'vexillology',
     },
     rollupOptions: {
