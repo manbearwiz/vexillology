@@ -1,3 +1,6 @@
+> ⚠️ DEPRECATED: This package is no longer maintained.
+> You should probably use [OpenFeature](https://openfeature.dev/) instead. This project predates OpenFeature, but I think they might have a little more backing.
+
 # vexillology
 
 [![npm](https://img.shields.io/npm/v/vexillology?style=flat-square)](https://www.npmjs.com/package/vexillology?activeTab=versions)
